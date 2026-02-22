@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="info">
+    <Properties>
+        <Property name="basePath">D:\PostgreSQL_Java\Work_Management_Config\log</Property>
+    </Properties>
+    
+    <Appenders>
+        <RollingFile name="FILELOGGER" 
+                     fileName="${basePath}\\app_log.log"
+ 					 filePattern="${basePath}\\Daily_Logs\\app_log.%d{yyyy-MM-dd}.log">
+		<LevelRangeFilter 
+			minLevel="INFO" 
+			maxLevel="ERROR" 
+			onMatch="ACCEPT" 
+			onMismatch="ACCEPT"/>
+            
+            <PatternLayout 
+            	pattern="%d{yyyy-MM-dd HH:mm:ss} | %-5level | %logger | %msg%n">
+            </PatternLayout>
+            
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+            </Policies>
+            
+        </RollingFile>
+
+    <RollingFile name="ERRORLOGGER"
+		fileName="${basePath}\\Error_Logs\\Error_Log.log" 
+		filePattern="${basePath}\\Error_Logs\\Error_By_Day\\Error_log.%d{yyyy-MM-dd}.log">
+            <LevelRangeFilter 
+            	minLevel="ERROR" 
+            	maxLevel="ERROR" 
+            	onMatch="ACCEPT" 
+            	onMismatch="DENY"/>
+            <PatternLayout 
+            	pattern="%d{yyyy-MM-dd HH:mm:ss} | %-5level | %logger | %msg%n" />
+            <Policies>
+				<TimeBasedTriggeringPolicy interval="1" modulate="true"></TimeBasedTriggeringPolicy>
+            </Policies>
+    </RollingFile>
+    
+    <!-- SMTP FOR ERROR ONLY -->
+    <SMTP 
+    	name="MAIL" 
+    	subject="WorkManagementSK - Error" 
+    	to="binson.selvin@skinternational.com" 
+    	from="binson.selvin@skinternational.com"
+    	smtpHost="smtp.gmail.com" 
+    	smtpPort="587" 
+    	bufferSize="10"  
+    	smtpUsername="binson.selvin@skinternational.com" 
+    	smtpPassword="B1nson#22@"
+    	smtpProtocol="smtp"
+    	>
+    	
+    	<LevelRangeFilter 
+    		minLevel="ERROR" 
+    		maxLevel="ERROR" 
+    		onMatch="ACCEPT" 
+    		onMismatch="DENY" /> 
+    	<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} | %-5level | %logger | %msg%n" />
+    </SMTP>
+    
+    <!-- FOR CONSOLE OUTPUT  -->
+     <Console name="STDOUT" target="SYSTEM_OUT">
+     	<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} | %-5level | %logger | %msg%n"/>
+     </Console>
+    
+    </Appenders>
+
+    <Loggers>
+        <Root level="info" additivity="false">
+            <appender-ref ref="FILELOGGER" />
+		    <appender-ref ref="ERRORLOGGER" />
+		    <appender-ref ref="STDOUT" />
+		    <appender-ref ref="MAIL" />
+		</Root>
+    </Loggers>
+</Configuration>
+

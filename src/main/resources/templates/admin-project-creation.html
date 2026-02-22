@@ -1,0 +1,1509 @@
+<!doctype html>
+<html lang="en" dir="ltr" xmlns:th="http://thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+	<link rel="icon" th:href="@{/assets/Images/favicon.png}" type="image/x-icon" />
+
+	<title>SK Dashboard</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<!-- Bootstrap Core and vandor -->
+	<link rel="stylesheet" th:href="@{/assets/plugins/bootstrap/css/bootstrap.min.css}" />
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/css/bootstrap-select.min.css">
+
+	<!-- Plugins css -->
+	<link rel="stylesheet" th:href="@{/assets/plugins/charts-c3/c3.min.css}" />
+
+	<!-- Core css -->
+	<link rel="stylesheet" th:href="@{/assets/css/main.css}" />
+	<link rel="stylesheet" th:href="@{/assets/css/theme1.css}" />
+
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+		.poppins-thin {
+			font-family: "Poppins", sans-serif;
+			font-weight: 100;
+			font-style: normal;
+		}
+
+		.poppins-extralight {
+			font-family: "Poppins", sans-serif;
+			font-weight: 200;
+			font-style: normal;
+		}
+
+		.poppins-light {
+			font-family: "Poppins", sans-serif;
+			font-weight: 300;
+			font-style: normal;
+		}
+
+		.poppins-regular {
+			font-family: "Poppins", sans-serif;
+			font-weight: 400;
+			font-style: normal;
+		}
+
+		.poppins-medium {
+			font-family: "Poppins", sans-serif;
+			font-weight: 500;
+			font-style: normal;
+		}
+
+		.poppins-semibold {
+			font-family: "Poppins", sans-serif;
+			font-weight: 600;
+			font-style: normal;
+		}
+
+		.poppins-bold {
+			font-family: "Poppins", sans-serif;
+			font-weight: 700;
+			font-style: normal;
+		}
+
+		.poppins-extrabold {
+			font-family: "Poppins", sans-serif;
+			font-weight: 800;
+			font-style: normal;
+		}
+
+		.poppins-black {
+			font-family: "Poppins", sans-serif;
+			font-weight: 900;
+			font-style: normal;
+		}
+
+		.poppins-thin-italic {
+			font-family: "Poppins", sans-serif;
+			font-weight: 100;
+			font-style: italic;
+		}
+
+		.poppins-extralight-italic {
+			font-family: "Poppins", sans-serif;
+			font-weight: 200;
+			font-style: italic;
+		}
+
+		.poppins-light-italic {
+			font-family: "Poppins", sans-serif;
+			font-weight: 300;
+			font-style: italic;
+		}
+
+		.poppins-regular-italic {
+			font-family: "Poppins", sans-serif;
+			font-weight: 400;
+			font-style: italic;
+		}
+
+		.poppins-medium-italic {
+			font-family: "Poppins", sans-serif;
+			font-weight: 500;
+			font-style: italic;
+		}
+
+		.poppins-semibold-italic {
+			font-family: "Poppins", sans-serif;
+			font-weight: 600;
+			font-style: italic;
+		}
+
+		.poppins-bold-italic {
+			font-family: "Poppins", sans-serif;
+			font-weight: 700;
+			font-style: italic;
+		}
+
+		.poppins-extrabold-italic {
+			font-family: "Poppins", sans-serif;
+			font-weight: 800;
+			font-style: italic;
+		}
+
+		.poppins-black-italic {
+			font-family: "Poppins", sans-serif;
+			font-weight: 900;
+			font-style: italic;
+		}
+
+		#left-sidebar {
+			z-index: 1 !important
+		}
+	</style>
+
+	<style type="text/css">
+		body {
+			font-family: "Poppins", sans-serif !important;
+		}
+
+		label {
+			font-size: 12px !important;
+		}
+
+		.form-control {
+			font-size: 12px !important;
+		}
+
+		.metismenu.grid>li>a {
+			height: 80px;
+			font-size: 12px !important;
+		}
+
+		.metismenu {
+			font-size: 12px !important;
+		}
+
+		h4 {
+			font-size: 14px !important;
+		}
+
+		.card-header {
+			font-size: 12px !important;
+		}
+
+		.card-body {
+			font-size: 12px !important;
+		}
+
+		.table,
+		thead th,
+		tbody td {
+			font-size: 12px !important;
+		}
+
+		.modal-dialog-slideout {
+			min-height: 100%;
+			margin: 0 0 0 auto;
+			background: #fff;
+		}
+
+		.modal.fade .modal-dialog.modal-dialog-slideout {
+			-webkit-transform: translate(100%, 0)scale(1);
+			transform: translate(100%, 0)scale(1);
+		}
+
+		.modal.fade.show .modal-dialog.modal-dialog-slideout {
+			-webkit-transform: translate(0, 0);
+			transform: translate(0, 0);
+			display: flex;
+			align-items: stretch;
+			-webkit-box-align: stretch;
+			height: 100%;
+		}
+
+		.modal.fade.show .modal-dialog.modal-dialog-slideout .modal-body {
+			overflow-y: auto;
+			overflow-x: hidden;
+		}
+
+		.modal-dialog-slideout .modal-content {
+			border: 0;
+		}
+
+		.modal-dialog-slideout .modal-header,
+		.modal-dialog-slideout .modal-footer {
+			height: 69px;
+			display: block;
+		}
+
+		.modal-dialog-slideout .modal-header h5 {
+			float: left;
+		}
+
+		.dropdown-menu .dropdown-item {
+			font-size: 12px !important;
+		}
+
+		.bootstrap-select>.dropdown-toggle {
+			font-size: 12px !important;
+		}
+
+		.bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+			width: 100% !important;
+		}
+	</style>
+</head>
+
+<body class="font-montserrat">
+	<!-- Page Loader -->
+	<div class="page-loader-wrapper">
+		<div class="loader">
+		</div>
+	</div>
+
+	<div id="main_content">
+
+		<div id="header_top" class="header_top">
+			<div class="container">
+				<div class="hleft">
+					<!--<a class="header-brand" href="index-2.html"><i class="fa fa-soccer-ball-o brand-logo"></i></a>-->
+					<div class="dropdown">
+						<a href="javascript:void(0)" class="nav-link user_btn"><img class="avatar"
+								th:src="@{/assets/Images/user.png}" alt="" data-toggle="tooltip" data-placement="right"
+								title="User Menu" /></a>
+						<a href="page-search.html" class="nav-link icon xs-hide"><i class="fa fa-search"></i></a>
+						<a href="app-calendar.html" class="nav-link icon app_inbox xs-hide"><i
+								class="fa fa-calendar"></i></a>
+						<a href="app-contact.html" class="nav-link icon xs-hide"><i class="fa fa-id-card-o"></i></a>
+
+					</div>
+				</div>
+				<div class="hright">
+					<div class="dropdown">
+						<!--<a href="javascript:void(0)" class="nav-link icon settingbar"><i class="fa fa-gear fa-spin" data-toggle="tooltip" data-placement="right" title="Settings"></i></a>-->
+						<a href="javascript:void(0)" class="nav-link icon menu_toggle"><i
+								class="fa  fa-align-left"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="rightsidebar" class="right_sidebar">
+			<a href="javascript:void(0)" class="p-3 settingbar float-right"><i class="fa fa-close"></i></a>
+			<div class="p-4">
+				<div class="mb-4">
+					<h6 class="font-14 font-weight-bold text-muted">Font Style</h6>
+					<div class="custom-controls-stacked font_setting">
+						<label class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" name="font" value="font-opensans">
+							<span class="custom-control-label">Open Sans Font</span>
+						</label>
+						<label class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" name="font" value="font-montserrat"
+								checked="">
+							<span class="custom-control-label">Montserrat Google Font</span>
+						</label>
+						<label class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" name="font" value="font-roboto">
+							<span class="custom-control-label">Robot Google Font</span>
+						</label>
+					</div>
+				</div>
+				<hr>
+				<div class="mb-4">
+					<h6 class="font-14 font-weight-bold text-muted">Dropdown Menu Icon</h6>
+					<div class="custom-controls-stacked arrow_option">
+						<label class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" name="marrow" value="arrow-a">
+							<span class="custom-control-label">A</span>
+						</label>
+						<label class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" name="marrow" value="arrow-b">
+							<span class="custom-control-label">B</span>
+						</label>
+						<label class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" name="marrow" value="arrow-c" checked="">
+							<span class="custom-control-label">C</span>
+						</label>
+					</div>
+					<h6 class="font-14 font-weight-bold mt-4 text-muted">SubMenu List Icon</h6>
+					<div class="custom-controls-stacked list_option">
+						<label class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" name="listicon" value="list-a" checked="">
+							<span class="custom-control-label">A</span>
+						</label>
+						<label class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" name="listicon" value="list-b">
+							<span class="custom-control-label">B</span>
+						</label>
+						<label class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" name="listicon" value="list-c">
+							<span class="custom-control-label">C</span>
+						</label>
+					</div>
+				</div>
+				<hr>
+				<div>
+					<h6 class="font-14 font-weight-bold mt-4 text-muted">General Settings</h6>
+					<ul class="setting-list list-unstyled mt-1 setting_switch">
+						<li>
+							<label class="custom-switch">
+								<span class="custom-switch-description">Night Mode</span>
+								<input type="checkbox" name="custom-switch-checkbox"
+									class="custom-switch-input btn-darkmode">
+								<span class="custom-switch-indicator"></span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-switch">
+								<span class="custom-switch-description">Fix Navbar top</span>
+								<input type="checkbox" name="custom-switch-checkbox"
+									class="custom-switch-input btn-fixnavbar">
+								<span class="custom-switch-indicator"></span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-switch">
+								<span class="custom-switch-description">Header Dark</span>
+								<input type="checkbox" name="custom-switch-checkbox"
+									class="custom-switch-input btn-pageheader" checked="checked">
+								<span class="custom-switch-indicator"></span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-switch">
+								<span class="custom-switch-description">Min Sidebar Dark</span>
+								<input type="checkbox" name="custom-switch-checkbox"
+									class="custom-switch-input btn-min_sidebar">
+								<span class="custom-switch-indicator"></span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-switch">
+								<span class="custom-switch-description">Sidebar Dark</span>
+								<input type="checkbox" name="custom-switch-checkbox"
+									class="custom-switch-input btn-sidebar">
+								<span class="custom-switch-indicator"></span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-switch">
+								<span class="custom-switch-description">Icon Color</span>
+								<input type="checkbox" name="custom-switch-checkbox"
+									class="custom-switch-input btn-iconcolor">
+								<span class="custom-switch-indicator"></span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-switch">
+								<span class="custom-switch-description">Gradient Color</span>
+								<input type="checkbox" name="custom-switch-checkbox"
+									class="custom-switch-input btn-gradient">
+								<span class="custom-switch-indicator"></span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-switch">
+								<span class="custom-switch-description">Box Shadow</span>
+								<input type="checkbox" name="custom-switch-checkbox"
+									class="custom-switch-input btn-boxshadow">
+								<span class="custom-switch-indicator"></span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-switch">
+								<span class="custom-switch-description">RTL Support</span>
+								<input type="checkbox" name="custom-switch-checkbox"
+									class="custom-switch-input btn-rtl">
+								<span class="custom-switch-indicator"></span>
+							</label>
+						</li>
+						<li>
+							<label class="custom-switch">
+								<span class="custom-switch-description">Box Layout</span>
+								<input type="checkbox" name="custom-switch-checkbox"
+									class="custom-switch-input btn-boxlayout">
+								<span class="custom-switch-indicator"></span>
+							</label>
+						</li>
+					</ul>
+				</div>
+				<hr>
+				<div class="form-group">
+					<label class="d-block">Storage <span class="float-right">77%</span></label>
+					<div class="progress progress-sm">
+						<div class="progress-bar" role="progressbar" aria-valuenow="77" aria-valuemin="0"
+							aria-valuemax="100" style="width: 77%;"></div>
+					</div>
+					<button type="button" class="btn btn-primary btn-block mt-3">Upgrade Storage</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="theme_div">
+			<div class="card">
+				<div class="card-body">
+					<ul class="list-group list-unstyled">
+						<li class="list-group-item mb-2">
+							<p>Default Theme</p>
+							<a href="index-2.html"><img th:src="@{/assets/Images/themes/default.png}"
+									class="img-fluid" /></a>
+						</li>
+						<li class="list-group-item mb-2">
+							<p>Night Mode Theme</p>
+							<a href="project-dark/index.html"><img th:src="@{/assets/Images/themes/dark.png}"
+									class="img-fluid" /></a>
+						</li>
+						<li class="list-group-item mb-2">
+							<p>RTL Version</p>
+							<a href="project-rtl/index.html"><img th:src="@{/assets/Images/themes/rtl.png}"
+									class="img-fluid" /></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="user_div">
+			<h5 class="brand-name mb-4"><img th:src="@{/assets/Images/sklogo.svg}" class="img-fluid" /><a
+					href="javascript:void(0)" class="user_btn"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+			</h5>
+			<div class="card-body">
+				<a th:href="@{/page-profile.html}"><img class="card-profile-img"
+						th:src="@{/assets/Images/sm/avatar1.jpg}" alt=""></a>
+				<h6 class="mb-0">Sanjeev Singh Chaudhary</h6>
+				<span>sanjeev@skinternational.com</span>
+
+			</div>
+		</div>
+
+		<div id="left-sidebar" class="sidebar ">
+			<h5 class="brand-name"><img width="77%" th:src="@{/assets/Images/SK_logo.png}"> <a href="javascript:void(0)"
+					class="menu_option float-right"><i class="fa fa-th-large" data-toggle="tooltip"
+						data-placement="left" title="Grid & List Toggle"></i></a></h5>
+			<nav id="left-sidebar-nav" class="sidebar-nav">
+				<br>
+
+				<ul class="metismenu">
+					<!--<li class="g_heading">Create</li>
+-->
+					<li><a th:href="@{/admin-customer-group.html}"><i class="fa fa-dashboard"></i><span>Customer
+								Group</span></a></li>
+					<li><a th:href="@{/admin-customer-creation.html}"><i
+								class="fa fa-user-plus"></i><span>Customer</span></a></li>
+					<li class="active"><a th:href="@{/admin-project-creation.html}"><i
+								class="fa fa-object-group"></i><span>Project</span></a></li>
+					<li><a th:href="@{/admin-user-management.html}"><i class="fa fa-users"></i><span>User</span></a>
+					</li>
+				</ul>
+
+				<br />
+
+
+			</nav>
+		</div>
+
+		<div class="page">
+			<div id="page_top" class="section-body top_dark">
+				<div class="container-fluid">
+					<div class="page-header">
+						<div class="left">
+							<a href="javascript:void(0)" class="icon menu_toggle mr-3"><i
+									class="fa  fa-align-left"></i></a>
+							<h1 class="page-title">Project</h1>
+						</div>
+						<div class="right">
+							<div class="input-icon xs-hide mr-4">
+								<input type="text" class="form-control" placeholder="Search for...">
+								<span class="input-icon-addon"><i class="fa fa-search"></i></span>
+							</div>
+							<div class="notification d-flex">
+								<!--<div class="dropdown d-flex">
+                                <a class="nav-link icon d-none d-md-flex btn btn-default btn-icon ml-2" data-toggle="dropdown"><i class="fa fa-language"></i></a>
+                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                    <a class="dropdown-item" href="#"><img class="w20 mr-2" src="assets/images/flags/us.svg">English</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#"><img class="w20 mr-2" src="assets/images/flags/es.svg">Spanish</a>
+                                    <a class="dropdown-item" href="#"><img class="w20 mr-2" src="assets/images/flags/jp.svg">japanese</a>
+                                    <a class="dropdown-item" href="#"><img class="w20 mr-2" src="assets/images/flags/bl.svg">France</a>
+                                </div>
+                            </div>-->
+								<div class="dropdown d-flex">
+									<a class="nav-link icon d-none d-md-flex btn btn-default btn-icon ml-2"
+										data-toggle="dropdown"><i class="fa fa-envelope"></i><span
+											class="badge badge-success nav-unread"></span></a>
+									<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+										<ul class="right_chat list-unstyled w350 p-0">
+											<li class="online">
+												<a href="javascript:void(0);" class="media">
+													<img class="media-object" th:src="@{/assets/Images/xs/avatar4.jpg}"
+														alt="">
+													<div class="media-body">
+														<span class="name">Donald Gardner</span>
+														<div class="message">It is a long established fact that a reader
+														</div>
+														<small>11 mins ago</small>
+														<span class="badge badge-outline status"></span>
+													</div>
+												</a>
+											</li>
+											<li class="online">
+												<a href="javascript:void(0);" class="media">
+													<img class="media-object " th:src="@{/assets/Images/xs/avatar5.jpg}"
+														alt="">
+													<div class="media-body">
+														<span class="name">Wendy Keen</span>
+														<div class="message">There are many variations of passages of
+															Lorem Ipsum</div>
+														<small>18 mins ago</small>
+														<span class="badge badge-outline status"></span>
+													</div>
+												</a>
+											</li>
+											<li class="offline">
+												<a href="javascript:void(0);" class="media">
+													<img class="media-object " th:src="@{/assets/Images/xs/avatar2.jpg}"
+														alt="">
+													<div class="media-body">
+														<span class="name">Matt Rosales</span>
+														<div class="message">Contrary to popular belief, Lorem Ipsum is
+															not simply</div>
+														<small>27 mins ago</small>
+														<span class="badge badge-outline status"></span>
+													</div>
+												</a>
+											</li>
+											<li class="online">
+												<a href="javascript:void(0);" class="media">
+													<img class="media-object " th:src="@{/assets/Images/xs/avatar3.jpg}"
+														alt="">
+													<div class="media-body">
+														<span class="name">Phillip Smith</span>
+														<div class="message">It has roots in a piece of classical Latin
+															literature from 45 BC</div>
+														<small>33 mins ago</small>
+														<span class="badge badge-outline status"></span>
+													</div>
+												</a>
+											</li>
+										</ul>
+										<div class="dropdown-divider"></div>
+										<a href="javascript:void(0)"
+											class="dropdown-item text-center text-muted-dark readall">Mark all as
+											read</a>
+									</div>
+								</div>
+								<div class="dropdown d-flex">
+									<a class="nav-link icon d-none d-md-flex btn btn-default btn-icon ml-2"
+										data-toggle="dropdown"><i class="fa fa-bell"></i><span
+											class="badge badge-primary nav-unread"></span></a>
+									<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+										<ul class="list-unstyled feeds_widget">
+											<li>
+												<div class="feeds-left"><i class="fa fa-check"></i></div>
+												<div class="feeds-body">
+													<h4 class="title text-danger">Issue Fixed <small
+															class="float-right text-muted">11:05</small></h4>
+													<small>WE have fix all Design bug with Responsive</small>
+												</div>
+											</li>
+											<li>
+												<div class="feeds-left"><i class="fa fa-user"></i></div>
+												<div class="feeds-body">
+													<h4 class="title">New User <small
+															class="float-right text-muted">10:45</small></h4>
+													<small>I feel great! Thanks team</small>
+												</div>
+											</li>
+											<li>
+												<div class="feeds-left"><i class="fa fa-thumbs-o-up"></i></div>
+												<div class="feeds-body">
+													<h4 class="title">7 New Feedback <small
+															class="float-right text-muted">Today</small></h4>
+													<small>It will give a smart finishing to your site</small>
+												</div>
+											</li>
+											<li>
+												<div class="feeds-left"><i class="fa fa-question-circle"></i></div>
+												<div class="feeds-body">
+													<h4 class="title text-warning">Server Warning <small
+															class="float-right text-muted">10:50</small></h4>
+													<small>Your connection is not private</small>
+												</div>
+											</li>
+											<li>
+												<div class="feeds-left"><i class="fa fa-shopping-cart"></i></div>
+												<div class="feeds-body">
+													<h4 class="title">7 New Orders <small
+															class="float-right text-muted">11:35</small></h4>
+													<small>You received a new oder from Tina.</small>
+												</div>
+											</li>
+										</ul>
+										<div class="dropdown-divider"></div>
+										<a href="javascript:void(0)"
+											class="dropdown-item text-center text-muted-dark readall">Mark all as
+											read</a>
+									</div>
+								</div>
+								<div class="dropdown d-flex">
+									<a class="nav-link icon d-none d-md-flex btn btn-default btn-icon ml-2"
+										data-toggle="dropdown"><i class="fa fa-user"></i></a>
+									<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+										<a class="dropdown-item" th:href="@{/page-profile.html}"><i
+												class="dropdown-icon fa fa-user"></i> Profile</a>
+										<a class="dropdown-item" th:href="@{/app-setting.html}"><i
+												class="dropdown-icon fa fa-cog"></i> Settings</a>
+										<a class="dropdown-item" href="javascript:void(0)"><span
+												class="float-right"><span class="badge badge-primary">6</span></span><i
+												class="dropdown-icon fa fa-envelope"></i> Inbox</a>
+										<a class="dropdown-item" href="javascript:void(0)"><i
+												class="dropdown-icon fa fa-send"></i> Message</a>
+										<div class="dropdown-divider"></div>
+										<a class="dropdown-item" href="javascript:void(0)"><i
+												class="dropdown-icon fa fa-info-circle"></i> Need help?</a>
+										<a class="dropdown-item" th:href="@{/login.html}"><i
+												class="dropdown-icon fa fa-sign-out"></i> Sign out</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<form id="project-creation-form" th:action="@{/admin/project/save}" method="post">
+				<div class="section-body mt-3">
+					<div class="container-fluid">
+						<div class="row clearfix">
+							<div class="col-lg-12">
+								<div class="mb-4">
+									<h4>Project Creation</h4>
+								</div>
+							</div>
+
+							<div class="col-12">
+								<div class="card">
+									<div class="card-body">
+
+										<div class="row">
+
+											<!--<table width="100%" border="0">
+  <tr>
+    <td><input type="text" class="form-control" placeholder="Customer Name"></td>
+    <td><select class="form-control" id="project">
+                            <option>--None--</option>
+							<option>Consulting</option>
+                            <option>Support</option>
+							<option>Database Support</option>
+							<option>Implementation</option>
+							<option>Addon-Customization</option>
+							<option>Pre-Sales / Demo</option>
+							<option>Application / Component Development</option>
+                          </select></td>
+    <td><select class="form-control" id="project">
+                            <option>--None--</option>
+							<option>Consulting</option>
+                            <option>Support</option>
+							<option>Database Support</option>
+							<option>Implementation</option>
+							<option>Addon-Customization</option>
+							<option>Pre-Sales / Demo</option>
+							<option>Application / Component Development</option>
+                          </select></td>
+    <td><select class="form-control" id="3odules">
+                            <option>--None--</option>
+                            <option>Data Backup</option>
+                            <option>Data Resortation</option>
+                          </select></td>
+    <td><select class="form-control" id="3odules">
+                            <option>--None--</option>
+                            <option>Data Backup</option>
+                            <option>Data Resortation</option>
+                          </select></td>
+    <td><input type="date" class="form-control" placeholder=""></td>
+    <td><input type="date" class="form-control" placeholder=""></td>
+    <td><select class="form-control" id="3odules">
+                            <option>--None--</option>
+                            <option>Data Backup</option>
+                            <option>Data Resortation</option>
+                          </select></td>
+    <td><select class="form-control" id="3odules">
+                            <option>--None--</option>
+                            <option>Data Backup</option>
+                            <option>Data Resortation</option>
+                          </select></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>-->
+
+
+										</div>
+
+										<div class="row">
+											<div class="col-lg-3 col-md-3 col-sm-12">
+												<!-- Non Error Div -->
+												<div class="form-group">
+													<label for="entity">Customer Group</label>
+													<select class="form-control" id="customerGroup" name="customerGroup"
+														th:if="${customerGroupList.size()>0}">
+														<option style="cursor: not-allowed;" disabled selected>--None--
+														</option>
+														<option th:each="custGroup : ${customerGroupList}"
+															th:val="${custGroup.customerGroupId}"
+															th:text="${custGroup.customerGroupName}">Legrands</option>
+													</select>
+													<select class="form-control" id="entity" name="customerGroup"
+														th:if="${customerGroupList.size()==0}">
+														<option style="cursor: not-allowed;" disabled selected>--None--
+														</option>
+													</select>
+													<small style="color: red;" id="customer-group-error"></small>
+												</div>
+
+											</div>
+
+											<div class="col-lg-3 col-md-3 col-sm-12" th:if="${customerNameError == null}">
+												<!-- FOR NON ERROR -->
+												<div class="form-group" >
+													<label for="status">Customer Name</label>
+													<select type="text" class="form-control" id="customer-name-select"
+														name="customerName" th:if="${nonGroupRelatedCustomer}">
+														<option style="cursor: not-allowed;" disabled selected>--None--
+														</option>
+														<option style="cursor: not-allowed;"
+															th:each="customer : ${nonGroupRelatedCustomer}"
+															th:value="${customer.customerId}"
+															th:text="${customer.customerName}">
+														</option>
+													</select>
+													<select type="text" class="form-control" id="customer-name-select"
+														name="customerName" th:if="${nonGroupRelatedCustomer == null}">
+														<option style="cursor: not-allowed;" disabled selected>--None--
+														</option>
+														<option style="cursor: not-allowed;"
+															th:each="customer : ${nonGroupRelatedCustomer}"
+															th:value="${customer.customerId}"
+															th:text="${customer.customerName}">
+														</option>
+													</select>
+													<small style="color: red;" id="customer-name-error"></small>
+												</div>
+											</div>
+											
+											<!-- FOR NON ERROR -->
+											<div class="col-lg-3 col-md-3 col-sm-12" th:if="${customerNameError != null}">
+												<!-- FOR NON ERROR -->
+												<div class="form-group" >
+													<label for="status">Customer Name</label>
+													<select type="text" class="form-control" id="customer-name-select"
+														name="customerName" th:if="${nonGroupRelatedCustomer}" style="border-color: red;" >
+														<option style="cursor: not-allowed;" disabled selected>--None--
+														</option>
+														<option style="cursor: not-allowed;"
+															th:each="customer : ${nonGroupRelatedCustomer}"
+															th:value="${customer.customerId}"
+															th:text="${customer.customerName}">
+														</option>
+													</select>
+													<select type="text" class="form-control" id="customer-name-select"
+														name="customerName" th:if="${nonGroupRelatedCustomer == null}" style="border-color: red;">
+														<option style="cursor: not-allowed;" disabled selected>--None--
+														</option>
+														<option style="cursor: not-allowed;"
+															th:each="customer : ${nonGroupRelatedCustomer}"
+															th:value="${customer.customerId}"
+															th:text="${customer.customerName}">
+														</option>
+													</select>
+													<small style="color: red;" id="customer-name-error" th:text="${customerNameError}" ></small>
+												</div>
+											</div>
+
+											<div class="col-lg-3 col-md-3 col-sm-12">
+												<!-- NON ERROR PROJECT TYPE -->
+												<div class="form-group" th:if="${projectTypeError == null}">
+													<label for="userrole">Project/Application Type</label>
+													<select class="form-control" id="projectType" name="projectType"
+														th:if="${projectTypeList.size()>0}">
+														<option style="cursor: not-allowed;" disabled selected>--None--
+														</option>
+														<option th:each="projectType : ${projectTypeList}"
+															th:val="${projectType.projectTypeId}"
+															th:text="${projectType.projectTypeName}"></option>
+													</select>
+													<select class="form-control" id="project" name="projectType"
+														th:if="${projectTypeList.size()==0}">
+														<option style="cursor: not-allowed;" disabled selected>--None--
+														</option>
+													</select>
+													<small style="color: red;" id="project-type-error"></small>
+												</div>
+												
+												<!-- ERROR PROJECT TYPE -->
+												<div class="form-group" th:if="${projectTypeError != null}">
+													<label for="userrole">Project/Application Type</label>
+													<select class="form-control" id="projectType" name="projectType"
+														th:if="${projectTypeList.size()>0}" style="border-color: red;">
+														<option style="cursor: not-allowed;" disabled selected>--None--
+														</option>
+														<option th:each="projectType : ${projectTypeList}"
+															th:val="${projectType.projectTypeId}"
+															th:text="${projectType.projectTypeName}"></option>
+													</select>
+													<select class="form-control" id="project" name="projectType"
+														th:if="${projectTypeList.size()==0}" style="border-color: red;" >
+														<option style="cursor: not-allowed;" disabled selected>--None--
+														</option>
+													</select>
+													<small style="color: red;" id="project-type-error" th:text="${projectTypeError}"></small>
+												</div>
+												
+											</div>
+
+											<div class="col-lg-3 col-md-3 col-sm-12">
+												<!-- NON ERROR MODULES -->
+												<div class="form-group">
+													<label for="modules">Modules <a href="" style="padding-left:5px;"
+															data-toggle="modal" data-target="#exampleModal5"><i
+																class="fa fa-plus-square-o">
+															</i></a></label>
+													<select class="form-control selectpicker" multiple
+														data-live-search="true" id="3odules" name="projectModules">
+														<option style="cursor: not-allowed;" disabled selected>--None--
+														</option>
+													</select>
+													<small style="color: red;"></small>
+												</div>
+											</div>
+
+											<div class="col-lg-3 col-md-3 col-sm-12">
+												<!-- ACTIVITY NON ERROR -->
+												<div class="form-group activityDiv" th:if="${projectActivityError == null}">
+													<label for="Activity">Activity <a href="" style="padding-left:5px;"
+															data-toggle="modal" data-target="#exampleModal6"><i
+																class="fa fa-plus-square-o">
+															</i></a></label>
+													<input type="hidden" name="projectActivityValue" id="projectActivityValue"/> 
+													<select class="form-control selectpicker activityGroup"
+														id="activity-select" multiple data-live-search="true"
+														name="projectActivity">
+														<option style="cursor: not-allowed;" disabled selected>--None--
+														</option>
+														<!--													<option>ABC</option>-->
+														<!--													<option>XYZ</option>-->
+													</select>
+													<small style="color: red;" id="activity-error"></small>
+												</div>
+												
+												<!-- ACTIVITY ERROR -->
+												<div class="form-group activityDiv" th:if="${projectActivityError != null}">
+													<label for="Activity">Activity <a href="" style="padding-left:5px;"
+															data-toggle="modal" data-target="#exampleModal6"><i
+																class="fa fa-plus-square-o">
+															</i></a></label>
+													<select class="form-control selectpicker activityGroup"
+														id="activity-select" multiple data-live-search="true"
+														name="projectActivity" style="border-color: red;">
+														<option style="cursor: not-allowed;" disabled selected>--None--
+														</option>
+														<!--													<option>ABC</option>-->
+														<!--													<option>XYZ</option>-->
+													</select>
+													<small style="color: red;" id="activity-error" th:text="${projectActivityError}"></small>
+												</div>
+												
+											</div>
+
+											<div class="col-lg-3 col-md-3 col-sm-12">
+												<!-- START DATE NON ERROR -->
+												<div class="form-group" th:if="${startDateError == null}">
+													<label for="pin">Start Date</label>
+													<input type="date" class="form-control" id="start-date"
+														data-date-format="DD MMMM YYYY" name="startDate" placeholder="">
+													<small style="color: red;" id="start-date-error"></small>
+												</div>
+												
+												<!-- START NON ERROR -->
+												<div class="form-group" th:if="${startDateError != null}">
+													<label for="pin">Start Date</label>
+													<input type="date" class="form-control" id="start-date"
+														data-date-format="DD MMMM YYYY" name="startDate" placeholder="" style="border-color: red;">
+													<small style="color: red;" th:text="${startDateError}" id="start-date-error"></small>
+												</div>
+											</div>
+
+											<div class="col-lg-3 col-md-3 col-sm-12">
+												<!-- END DATE NON ERROR -->
+												<div class="form-group" th:if="${endDateError == null}">
+													<label for="pin">End Date</label>
+													<input type="date" class="form-control" id="end-date" name="endDate"
+														placeholder="" >
+													<small style="color: red;" id="end-date-error"></small>
+												</div>
+												
+												<!-- END DATE ERROR -->
+												<div class="form-group" th:if="${endDateError != null}">
+													<label for="pin">End Date</label>
+													<input type="date" class="form-control" id="end-date" name="endDate"
+														placeholder="" style="border-color: red;">
+													<small style="color: red;" id="end-date-error" th:text="${endDateError}"></small>
+												</div>
+											</div>
+
+											<div class="col-lg-3 col-md-3 col-sm-12">
+												<!-- CONTRACT TYPE NON ERROR -->
+												<div class="form-group" th:if="${contractTypeError == null}">
+													<label for="department">Contract Type</label>
+													<select class="form-control" id="contract-type" name="contractType">
+														<option style="cursor: not-allowed;" disabled selected>--None--
+														</option>
+														<option>AMC</option>
+													</select>
+													<small style="color: red;" id="contract-type-error"></small>
+												</div>
+												
+												<!-- CONTRACT TYPE ERROR -->
+												<div class="form-group" th:if="${contractTypeError != null}">
+													<label for="department">Contract Type</label>
+													<select class="form-control" id="contract-type" style="border-color: red;" name="contractType">
+														<option style="cursor: not-allowed;" disabled selected>--None--
+														</option>
+														<option>AMC</option>
+													</select>
+													<small style="color: red;" id="contract-type-error" th:text="${contractTypeError}"></small>
+												</div>
+												
+											</div>
+
+											<div class="col-lg-3 col-md-6 col-sm-12">
+												<!-- SK BRANCH NON ERROR -->
+												<div class="form-group" th:if="${skBranchError == null}">
+													<label for="City">SK Branch</label>
+													<select class="form-control" id="branch-select" name=skBranch
+														th:if="${skBranchList.size()>0}">
+														<option style="cursor: not-allowed;" disabled selected>--None--
+														</option>
+														<option th:each="skBranch : ${skBranchList}"
+															th:val="${skBranch.branchId}"
+															th:text="${skBranch.branchName}"></option>
+													</select>
+													<select class="form-control" id="branch" name=skBranch
+														th:if="${skBranchList.size()==0}">
+														<option style="cursor: not-allowed;" disabled>--None--</option>
+													</select>
+													<small style="color: red;" id="sk-branch-error"></small>
+												</div>
+												
+												<!-- SK BRANCH ERROR -->
+												<div class="form-group" th:if="${skBranchError != null}">
+													<label for="City">SK Branch</label>
+													<select class="form-control" id="branch-select" name=skBranch
+														th:if="${skBranchList.size()>0}" style="border-color: red;">
+														<option style="cursor: not-allowed;" disabled selected>--None--
+														</option>
+														<option th:each="skBranch : ${skBranchList}"
+															th:val="${skBranch.branchId}"
+															th:text="${skBranch.branchName}"></option>
+													</select>
+													<select class="form-control" id="branch" name=skBranch
+														th:if="${skBranchList.size()==0}" style="border-color: red;" >
+														<option style="cursor: not-allowed;" disabled>--None--</option>
+													</select>
+													<small style="color: red;" id="sk-branch-error" th:text="${skBranchError}"></small>
+												</div>
+												
+											</div>
+
+
+											<div class="col-lg-3 col-md-3 col-sm-12">
+												<!-- MANAGER NON ERROR -->
+												<div class="form-group" th:if="${projectManagerError == null}">
+													<label for="status3">Manager</label>
+													<select class="form-control" id="manager-select"
+														name="projectManager">
+														<option style="cursor: not-allowed;" disabled selected>--None--
+														</option>
+														<!--													<option th:each="manager : ${managerList}" th:text="${manager.username}" th:value="${manager.userEmail}" ></option>-->
+													</select>
+													<small style="color: red;" id="manager-error"></small>
+												</div>
+												
+												<!-- MANAGER NON ERROR -->
+												<div class="form-group" th:if="${projectManagerError != null}">
+													<label for="status3">Manager</label>
+													<select class="form-control" id="manager-select"
+														name="projectManager" style="border-color:red;">
+														<option style="cursor: not-allowed;" disabled selected>--None--
+														</option>
+														<!--													<option th:each="manager : ${managerList}" th:text="${manager.username}" th:value="${manager.userEmail}" ></option>-->
+													</select>
+													<small style="color: red;" id="manager-error" th:text="${projectManagerError}"></small>
+												</div>
+											</div>
+										</div>
+
+										<div class="row" style="margin-top: 15px;">
+											<div class="text-left">
+												<button id="mainForm" class="btn btn-primary btn-block" onclick="return validateSubmitForm()" title=""><i
+														 class="fa fa-save"></i>Save</button> </div>
+										</div>
+										<!--									<div class="row" style="margin-top: 15px;">-->
+										<!--										<div class="text-left"><button id="mainForm" type="submit" th:if="${errorMap != null}"-->
+										<!--												class="btn btn-primary btn-block" disabled title=""><i class="fa fa-save"></i>-->
+										<!--												Save</button> </div>-->
+										<!--									</div>-->
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+
+			<div class="section-body">
+				<div class="container-fluid">
+					<div class="row clearfix">
+						<div class="col-12 col-sm-12">
+							<div class="card">
+								<div class="card-header">
+									<h3 class="card-title">Project Details</h3>
+								</div>
+								<div class="card-body">
+									<div>
+
+										<div
+											style="position: static; z-index: 999; overflow-x:scroll; scrollbar-width: thin;">
+											<table
+												class="table table-hover table-striped text-nowrap table-vcenter mb-0">
+												<thead>
+													<tr>
+														<th>Action</th>
+														<th>#</th>
+														<th>Customer Name</th>
+														<th>Project/Application Type</th>
+														<th>Customer Group</th>
+														<th>Modules</th>
+														<th>Activity</th>
+														<th>Start Date</th>
+														<th>End Date</th>
+														<th>Contract Type</th>
+														<th>Manager</th>
+														<th>SK Branch</th>
+
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td style="text-align: center;">
+															<a href="#" data-toggle="modal"
+																data-target="#exampleModal4"><i
+																	class="fa fa-edit"></i></a> <a href="#"><i
+																	class="fa fa-trash-o"></i></a>
+														</td>
+
+														<td>
+															<a href="#">PR001</a>
+														</td>
+														<td>Yokohoma</td>
+														<td>Consulting</td>
+														<td>Legrand</td>
+														<td>Data Backup</td>
+														<td>Active</td>
+														<td>15-07-2024</td>
+														<td>25-09-2024</td>
+														<td>AMC</td>
+														<td>Amol Sathe</td>
+														<td>Mumbai</td>
+
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+
+
+										<!--<div class="table-responsive">
+                                    <table class="table table-hover table-striped text-nowrap table-vcenter mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Customer Name</th>
+												<th>Project/Application Type</th>
+                                                <th>Customer Group</th>
+                                                <th>Modules</th>
+												<th>Activity</th>
+												<th>Start Date</th>
+												<th>End Date</th>
+												<th>Contract Type</th>
+												<th>Manager</th>
+												<th>Action</th>
+											</tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+												  <a href="#" data-toggle="modal" data-target="#exampleModal4">PR001</a>
+												</td>
+                                                <td>Yokohoma</td>
+												<td>Application / Component Development</td>
+												<td>-</td>
+                                                <td>Data Backup</td>
+												<td>ABC</td>
+												<td>22/11/2023</td>
+												<td>22/11/2024</td>
+												<td>XYZ</td>
+												<td>Sandip Atkari</td>
+												<td style="text-align: center;"><a href="#"><i class="fa fa-trash-o"></li></a></td>
+                                             </tr>
+											
+											<tr>
+                                                <td>
+												  <a href="#" data-toggle="modal" data-target="#exampleModal4">PR002</a>
+												</td>
+                                                <td>Hicare</td>
+												<td>Application / Component Development</td>
+												<td>-</td>
+                                                <td>XYZ</td>
+												<td>ABC</td>
+												<td>02/11/2022</td>
+												<td>02/11/2024</td>
+												<td>XYZ</td>
+												<td>Satish Tale</td>
+												<td style="text-align: center;"><a href="#"><i class="fa fa-trash-o"></li></a></td>
+                                             </tr>
+											
+                                        </tbody>
+                                    </table>
+                                </div>-->
+
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="section-body">
+				<footer class="footer">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-md-6 col-sm-12">
+								<a href="#">© Copyright SK International. All Rights Reserved</a>
+							</div>
+							<div class="col-md-6 col-sm-12 text-md-right">
+								<!--<ul class="list-inline mb-0">
+                                <li class="list-inline-item"><a href="doc/index.html">Documentation</a></li>
+                                <li class="list-inline-item"><a href="javascript:void(0)">FAQ</a></li>
+                                <li class="list-inline-item"><a href="javascript:void(0)" class="btn btn-outline-primary btn-sm">Buy Now</a></li>
+                            </ul>-->
+							</div>
+						</div>
+					</div>
+				</footer>
+			</div>
+		</div>
+	</div>
+
+	<!-- Customer Moadal Popup-->
+
+	<div class="modal fade" id="exampleModal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel4"
+		aria-hidden="true">
+		<div class="modal-dialog modal-dialog-slideout modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">PR001</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">X</span> </button>
+				</div>
+
+				<div class="modal-body">
+
+					<div class="section-body mt-3">
+						<div class="container-fluid">
+							<div class="row clearfix">
+
+
+								<div class="col-12">
+									<div class="card" style="border:0!important;">
+										<div class="card-body" style="padding:0;">
+
+											<div class="row">
+
+												<div class="col-lg-6 col-md-6 col-sm-12">
+													<div class="form-group">
+														<label for="status">Customer Name</label>
+														<select type="text" class="form-control" value="Yokohoma">
+															<option>ANZ</option>
+															<option>Yokohama</option>
+															<option>Bridgestone</option>
+														</select>
+													</div>
+												</div>
+
+
+												<div class="col-lg-6 col-md-6 col-sm-12">
+													<div class="form-group">
+														<label for="userrole">Project/Application Type</label>
+														<select class="selectpicker project-type" multiple
+															aria-label="Default select example" data-live-search="true">
+															<option>Consulting</option>
+															<option>Support</option>
+															<option>Database Support</option>
+															<option>Implementation</option>
+															<option>Addon-Customization</option>
+															<option>Pre-Sales / Demo</option>
+														</select>
+													</div>
+												</div>
+
+												<div class="col-lg-6 col-md-6 col-sm-12">
+													<div class="form-group">
+														<label for="entity">Customer Group</label>
+														<select class="form-control" id="entity3">
+															<option>Legrand</option>
+															<option>Piramal</option>
+
+														</select>
+													</div>
+												</div>
+
+
+												<div class="col-lg-6 col-md-6 col-sm-12">
+													<div class="form-group">
+														<label for="userrole">Modules <a style="padding-left:5px;"
+																href=""><i
+																	class="fa fa-plus-square-o"></i></a></label><br />
+														<select class="selectpicker" multiple data-live-search="true">
+															<option>Data Backup</option>
+															<option>Data Restoration</option>
+														</select>
+													</div>
+												</div>
+
+												<div class="col-lg-6 col-md-6 col-sm-12">
+													<div class="form-group">
+														<label for="Activity">Activity <a style="padding-left:5px;"
+																href=""><i class="fa fa-plus-square-o"></i></a></label>
+														<select class="form-control" id="activity3">
+															<option>XYZ</option>
+															<option>ABC</option>
+
+														</select>
+													</div>
+												</div>
+
+												<div class="col-lg-6 col-md-6 col-sm-12">
+													<div class="form-group">
+														<label for="pin">Start Date</label>
+														<input type="date" class="form-control" vale="22/11/2023">
+													</div>
+												</div>
+
+												<div class="col-lg-6 col-md-6 col-sm-12">
+													<div class="form-group">
+														<label for="pin">End Date</label>
+														<input type="date" class="form-control" vale="22/11/2024">
+													</div>
+												</div>
+
+												<div class="col-lg-6 col-md-6 col-sm-12">
+													<div class="form-group">
+														<label for="department">Contract Type</label>
+														<select class="form-control" id="Department3">
+
+															<option>ABC</option>
+															<option>XYZ</option>
+														</select>
+													</div>
+												</div>
+
+												<div class="col-lg-6 col-md-6 col-sm-12">
+													<div class="form-group">
+														<label for="status3">Manager</label>
+														<select class="form-control" id="status33">
+															<option>Sandip Atkari</option>
+															<option>Satish Tale</option>
+														</select>
+													</div>
+												</div>
+
+												<div class="col-lg-6 col-md-6 col-sm-12">
+													<div class="form-group">
+														<label for="status3">SK Branch</label>
+														<select class="form-control" id="status33">
+															<option>SKI-Mumbai</option>
+															<option>SKI-Pune</option>
+
+														</select>
+													</div>
+												</div>
+
+
+											</div>
+
+											<!--Modal end-->
+
+
+
+										</div>
+
+
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Save changes</button>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<!--Modal end-->
+
+	<!-- Customer Moadal Popup-->
+
+	<div class="modal fade" id="exampleModal5" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel5"
+		aria-hidden="true">
+		<div class="modal-dialog modal-dialog-slideout modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel5">Add Module</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">X</span> </button>
+				</div>
+
+				<div class="modal-body">
+
+					<div class="section-body mt-3">
+						<div class="container-fluid">
+							<div class="row clearfix">
+								<div class="col-lg-12">
+
+								</div>
+
+								<div class="col-12">
+									<div class="card" style="border:0!important;">
+										<div class="card-body" style="padding:0;">
+
+											<div class="row">
+
+												<div class="col-lg-6 col-md-6 col-sm-12">
+													<div class="form-group">
+														<label for="status">Module Name</label>
+														<input type="text" class="form-control" value="">
+													</div>
+												</div>
+
+
+											</div>
+
+											<!--Modal end-->
+
+
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Save</button>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<!--Modal end-->
+
+	<!-- Activity Moadal Popup-->
+
+	<div class="modal fade" id="exampleModal6" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel6"
+		aria-hidden="true">
+		<div class="modal-dialog modal-dialog-slideout modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel6">Add Activity</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">X</span> </button>
+				</div>
+
+				<div class="modal-body">
+
+					<div class="section-body mt-3">
+						<div class="container-fluid">
+							<div class="row clearfix">
+								<div class="col-lg-12">
+
+								</div>
+
+								<div class="col-12">
+									<div class="card" style="border:0!important;">
+										<div class="card-body" style="padding:0;">
+
+											<div class="row">
+
+												<div class="col-lg-6 col-md-6 col-sm-12">
+													<div class="form-group">
+														<label for="status">Activity Name</label>
+														<input type="text" class="form-control" value="">
+													</div>
+												</div>
+
+
+											</div>
+
+											<!--Modal end-->
+
+
+
+										</div>
+
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Save</button>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<!--Modal end-->
+
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+	<script th:src="@{/assets/bundles/lib.vendor.bundle.js}"></script>
+
+	<!--<script src="assets/bundles/apexcharts.bundle.js"></script>
+<script src="assets/bundles/counterup.bundle.js"></script>
+<script src="assets/bundles/knobjs.bundle.js"></script>
+<script src="assets/bundles/c3.bundle.js"></script>-->
+
+	<script th:src="@{/assets/js/core.js}"></script>
+	<script th:src="@{/assets/js/page/project-index.js}"></script>
+	<script th:src="@{/assets/js/admin-project-creation.js}"></script>
+	<script th:src="@{/assets/js/bootstrap-select.min.js}"></script>
+</body>
+
+</html>

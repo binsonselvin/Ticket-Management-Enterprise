@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>SK PMA - Register Org</title>
+	<script th:src="@{/assets/libs/js/jquery-3.6.0.min.js}"></script>
+	<script th:src="@{/assets/libs/js/bootstrap.bundle.min.js}"></script>
+	<link rel='stylesheet' th:href="@{assets/libs/css/bootstrap.min.css}" />
+	<script type="text/javascript" th:src="@{/assets/js/OrgRegister.js}"></script>
+	<style>
+		@import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap");
+
+		* {
+			margin: 0;
+			padding: 0;
+			outline: none;
+			font-family: "Poppins", sans-serif;
+		}
+
+		body {
+			font-family: "Poppins", sans-serif;
+		}
+
+		.login,
+		.image {
+			min-height: 100vh;
+		}
+
+		.bg-image {
+			/*background-image: url("https://res.cloudinary.com/mhmd/image/upload/v1555917661/art-colorful-contemporary-2047905_dxtao7.jpg");*/
+			background: url(assets/Images/loginbanner2.jpg);
+			background-size: cover;
+		}
+
+		.bg-light {
+			background-color: #fafbfc !important;
+		}
+
+		.display-4 {
+			font-size: 2.3rem;
+			font-weight: 300;
+			line-height: 1.2;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container-fluid">
+		<div class="row no-gutter">
+			<!-- The image half -->
+			<div class="col-md-6 d-none d-md-flex bg-image"></div>
+
+			<!-- The content half -->
+			<div class="col-md-6 bg-light">
+				<div class="login d-flex align-items-center py-5">
+					<!-- Demo content-->
+					<div class="container">
+						<div class="row">
+							<div class="col-6"></div>
+							<div class="col-6">
+								<small>Already have account? <a style="color: red;" href="login">SIGN IN</a></small>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-10 col-xl-8 mx-auto" style="margin-left:10px;">
+								<p class="text-muted mb-4"><img alt="sklogo" src="assets/Images/sklogo.png" /></p>
+								<h4 class="display-4 mt-3">Register Organization</h4>
+								<form style="margin-top:20px;" th:action="@{register/verifyCode}"
+									method="get" onsubmit="return validateData()">
+									<!-- Organization Name -->
+									<div class="form-group mb-4">
+										<input id="inputOrg" name="inputOrg" value="SK INTERNATIONAL" readonly="true"
+											type="text" placeholder="Organization Name" autofocus=""
+											class="form-control rounded-pill border-0 shadow-sm px-4">
+									</div>
+
+									<!-- Username-->
+									<div class="form-group mb-4">
+										<input id="inputUsername" name="inputUsername" type="text"
+											placeholder="Enter Username" maxlength="30"
+											class="form-control rounded-pill shadow-sm px-4 text-primary"
+											required>
+										<div style="color:red; margin-top: 5px; margin-left: 10px;">
+											<small class="invalid_username"></small>
+										</div>
+									</div>
+									
+
+									<div class="form-group mb-4">
+										<input id="inputEmail" name="inputEmail" maxlength="320" type="email"
+											placeholder="Enter Work Email Address"
+											class="form-control rounded-pill shadow-sm px-4 text-primary">
+										<div style="color:red; margin-top: 5px; margin-left: 10px;">
+											<small class="invalid_email"></small>
+										</div>
+									</div>
+
+									<!-- Password -->
+									<div class="form-group mb-4">
+										<input id="inputPasscode" name="inputPasscode" type="password"
+											placeholder="Password"
+											class="form-control rounded-pill shadow-sm px-4">
+										<div style="color:red; margin-top: 5px; margin-left: 10px;">
+											<small class="invalid_password"></small>
+										</div>
+									</div>
+
+									<!-- Confirm Password -->
+									<div class="form-group mb-4">
+										<input id="inputConfPasscode" name="inputConfPasscode" type="password"
+											placeholder="Confirm Password"
+											class="form-control rounded-pill shadow-sm px-4">
+										<div style="color:red; margin-top: 5px; margin-left: 10px;">
+											<small class="invalid_conf_password"></small>
+										</div>
+									</div>
+
+									<!--									<div class="form-group mb-4"><img src="Images/captcha.png" width="250" /></div>-->
+									<button type="submit" class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm">
+										Register Org</button>
+									<!--
+									<button type="submit"
+										class="btn btn-secondary btn-block text-uppercase mb-2 rounded-pill shadow-sm">Sign
+										in</button> -->
+								</form>
+							</div>
+						</div>
+					</div><!-- End -->
+				</div>
+			</div><!-- End -->
+		</div>
+	</div>
+</body>
+
+</html>
